@@ -45,7 +45,7 @@ pub fn build(b: *std.Build) void {
             b,
             t,
             std.fmt.allocPrint(b.allocator, "{s}-{s}", .{ "execve", @tagName(t.cpu_arch.?) }) catch unreachable,
-            .{ .path = "src/main.zig" },
+            .{ .path = "src/execve.zig" },
         );
         buildShellcode(
             b,
