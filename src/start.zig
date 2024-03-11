@@ -11,16 +11,12 @@ pub export fn _start() linksection(".startup") callconv(.Naked) noreturn {
             \\ xorl %%ebp, %%ebp
             \\ andq $-16, %%rsp
             \\ callq %[entrypoint:P]
-            \\ 1:
-            \\ jmp 1b
             ,
             .aarch64, .aarch64_be =>
             \\ mov fp, #0
             \\ mov lr, #0
             \\ nop
             \\ bl %[entrypoint]
-            \\ 1:
-            \\ b 1b
             ,
             else => @compileError("Unsupported arch"),
         }
