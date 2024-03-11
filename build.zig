@@ -29,7 +29,10 @@ pub fn buildShellcode(b: *std.Build, query: std.Target.Query, name: []const u8, 
     });
     exe.root_module.addImport("main", sc);
 
-    const copied = b.addObjCopy(exe.getEmittedBin(), .{ .format = .bin, .only_section = ".text" });
+    const copied = b.addObjCopy(exe.getEmittedBin(), .{
+        .format = .bin,
+        .only_sections = &[_][]const u8{".text"},
+    });
 
     const install_step = b.addInstallBinFile(
         copied.getOutput(),
