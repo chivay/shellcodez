@@ -18,6 +18,12 @@ pub export fn _start() linksection(".startup") callconv(.Naked) noreturn {
             \\ nop
             \\ bl %[entrypoint]
             ,
+            .arm, .armeb, .thumb, .thumbeb =>
+            \\ mov fp, #0
+            \\ mov lr, #0
+            \\ and sp, #-16
+            \\ b %[entrypoint]
+            ,
             else => @compileError("Unsupported arch"),
         }
         :
